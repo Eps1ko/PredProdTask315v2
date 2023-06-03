@@ -14,8 +14,6 @@ async function showEditModal(id) {
     form.username.value = user.username;
     form.password.value = user.password;
 
-    // $('#rolesEditUser').empty();
-
     await fetch("http://localhost:8080/api/roles")
         .then(res => res.json())
         .then(roles => {

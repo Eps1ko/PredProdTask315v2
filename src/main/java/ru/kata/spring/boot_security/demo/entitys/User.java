@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.model;
+package ru.kata.spring.boot_security.demo.entitys;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
@@ -6,7 +6,6 @@ import org.hibernate.Hibernate;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -14,13 +13,13 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
 @Getter
 @Setter
 @ToString
+@EqualsAndHashCode
 public class User implements UserDetails {
 
    @Id
@@ -94,27 +93,4 @@ public class User implements UserDetails {
       roles.add(role);
    }
 
-   @Override
-   public boolean equals(Object o) {
-      if (this == o) return true;
-      if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-      User user = (User) o;
-      return id != null && Objects.equals(id, user.id);
-   }
-
-   @Override
-   public int hashCode() {
-      return getClass().hashCode();
-   }
-
-   @Override
-   public String toString() {
-      return "User{" +
-              "id=" + id +
-              ", firstName='" + firstName + '\'' +
-              ", lastName='" + lastName + '\'' +
-              ", email='" + username + '\'' +
-              ", roleList=" + roles +
-              '}';
-   }
 }
